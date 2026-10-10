@@ -27,7 +27,7 @@ describe('sim', () => {
     expect(sim.state.containers[0]?.inContainer).toBe(delivered)
     // A clean first trip earns the No-Drip bonus without wax.
     expect(sim.state.current.noDrip).toBe('intact')
-    expect(sim.wallet.coins()).toBe(Math.round(delivered / 100) + 10)
+    expect(sim.wallet.coins()).toBe(Math.round((delivered * 30) / 1000) + 30)
     autopilot(game, () => sim.state.scene === 'well')
     expect(sim.state.tripReport).toMatch(
       /^0\.\d L\. The bucket is \d+% full\.$/

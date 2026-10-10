@@ -320,7 +320,7 @@ describe('phone calls', () => {
     expect(sim.state.event?.outcome).toBe('countered')
   })
 
-  it('make Mum call back after you decline, and pay 20 coins when you answer', () => {
+  it('make Mum call back after you decline, and pay 60 coins when you answer', () => {
     const game = makeSim(84)
     const { sim } = game
     // The second caller in turn is Mum.
@@ -338,7 +338,7 @@ describe('phone calls', () => {
     const coins = sim.wallet.coins()
     runPilot(game, () => sim.state.event?.stage === 'warning', 60_000)
     expect(sim.answerCall()).toBe(true)
-    expect(sim.wallet.coins()).toBe(coins + 20)
+    expect(sim.wallet.coins()).toBe(coins + 60)
   })
 
   it('keep your interview answer for the ending', () => {

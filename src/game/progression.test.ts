@@ -13,7 +13,7 @@ function oneTrip(game: TestGame) {
 }
 
 describe('containers and progression', () => {
-  it('finishes the bucket: +50 coins, the kick cutscene, then the sink in autumn', () => {
+  it('finishes the bucket: +150 coins, the kick cutscene, then the sink in autumn', () => {
     const game = makeSim(50)
     const { sim } = game
     const s = sim.state
@@ -23,7 +23,9 @@ describe('containers and progression', () => {
     expect(s.containers[0]?.done).toBe(true)
     expect(s.containerIndex).toBe(1)
     expect(s.season).toBe('autumn')
-    expect(sim.wallet.coins()).toBe(Math.round(delivered / 100) + 10 + 50)
+    expect(sim.wallet.coins()).toBe(
+      Math.round((delivered * 30) / 1000) + 30 + 150
+    )
     // The HUD stays on the full bucket while the pour's result shows.
     const hud = createHudStore()
     new SnapshotPublisher(hud).publish(sim, 'mouse', true)
@@ -40,7 +42,7 @@ describe('containers and progression', () => {
     expect(sim.balanced()).toBe(true)
   })
 
-  it('finishes the sink: +100 coins and the bathtub', () => {
+  it('finishes the sink: +300 coins and the bathtub', () => {
     const game = makeSim(51)
     const { sim } = game
     const s = sim.state
@@ -49,7 +51,7 @@ describe('containers and progression', () => {
     runPilot(game, () => s.phase === 'poured')
     expect(s.containers[1]?.done).toBe(true)
     expect(s.containerIndex).toBe(2)
-    expect(sim.wallet.coins()).toBeGreaterThanOrEqual(100)
+    expect(sim.wallet.coins()).toBeGreaterThanOrEqual(300)
     runPilot(game, () => s.scene === 'cutscene')
     expect(s.phase).toBe('sinkDone')
     runPilot(game, () => s.scene === 'well', 10_000)

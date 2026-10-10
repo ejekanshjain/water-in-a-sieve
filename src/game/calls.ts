@@ -26,7 +26,7 @@ export const RING_LINES: Record<Caller, string> = {
 
 /** What they say once you answer. The interviewer asks a question instead. */
 export const TALK_LINES: Record<Exclude<Caller, 'interviewer'>, string> = {
-  mum: "I've sent you 20 coins. Buy a snack.",
+  mum: "I've sent you 60 coins. Buy a snack.",
   scam: 'Press 1 to claim your cruise.',
   water: 'Soon.'
 }

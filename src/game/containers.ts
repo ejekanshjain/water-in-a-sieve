@@ -12,8 +12,8 @@ export interface ContainerDef {
 }
 
 export const CONTAINERS: readonly ContainerDef[] = [
-  { id: 'bucket', name: 'Bucket', capacityMl: 10_000, bonus: 50 },
-  { id: 'sink', name: 'Sink', capacityMl: 20_000, bonus: 100 },
+  { id: 'bucket', name: 'Bucket', capacityMl: 10_000, bonus: 150 },
+  { id: 'sink', name: 'Sink', capacityMl: 20_000, bonus: 300 },
   { id: 'tub', name: 'Bathtub', capacityMl: 100_000, bonus: 0 }
 ]
 

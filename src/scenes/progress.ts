@@ -44,7 +44,7 @@ export const BUCKET_DONE_CUES: readonly Cue[] = [
   { at: SHUT_MS, sound: 'slam', shake: 5, action: 'shut' },
   {
     at: 5400,
-    caption: '+50 coins. Next: the kitchen sink.',
+    caption: '+150 coins. Next: the kitchen sink.',
     captionMs: 1500
   },
   { at: 6000, sound: 'wind', volume: 0.6, action: 'leaves' },
@@ -67,7 +67,7 @@ export const SINK_DONE_CUES: readonly Cue[] = [
   },
   {
     at: 4300,
-    caption: '+100 coins. Next: the bathtub.',
+    caption: '+300 coins. Next: the bathtub.',
     captionMs: 1500
   },
   { at: 5800, caption: '100 L.', captionMs: 1300, sound: 'fail' }

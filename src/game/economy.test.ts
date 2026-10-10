@@ -23,10 +23,10 @@ const TRIP: TripRecord = {
 }
 
 describe('economy', () => {
-  it('pays 10 coins per litre, rounded per delivery', () => {
+  it('pays 30 coins per litre, rounded per delivery', () => {
     expect(coinsFor(0)).toBe(0)
-    expect(coinsFor(840)).toBe(8)
-    expect(coinsFor(2_660)).toBe(27)
+    expect(coinsFor(840)).toBe(25)
+    expect(coinsFor(2_660)).toBe(80)
   })
 
   it('starts the No-Drip badge only for a 90% scoop', () => {
@@ -35,7 +35,7 @@ describe('economy', () => {
   })
 
   it('pays the No-Drip bonus only while the badge is intact', () => {
-    expect(noDripBonus(TRIP)).toBe(10)
+    expect(noDripBonus(TRIP)).toBe(30)
     expect(noDripBonus({ ...TRIP, noDrip: 'cracked' })).toBe(0)
     expect(noDripBonus({ ...TRIP, deliveredMl: 0 })).toBe(0)
   })
@@ -61,7 +61,7 @@ describe('economy', () => {
     expect(game.sim.state.current.noDrip).toBe('cracked')
   })
 
-  it('pays +50 when the bucket fills, and moves on to the sink', () => {
+  it('pays +150 when the bucket fills, and moves on to the sink', () => {
     const game = makeSim(32)
     const bucket = game.sim.state.containers[0]
     if (!bucket) throw new Error('no bucket')

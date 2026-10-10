@@ -378,10 +378,10 @@ export const POUR_GAUGE_BOTTOM = 520
 
 // ---------------------------------------------------------------- Economy
 
-/** Coins per delivery: Math.round(mL / ML_PER_COIN), so 10 coins per litre. */
-export const ML_PER_COIN = 100
+/** Coins per litre delivered, rounded per delivery. */
+export const COINS_PER_LITRE = 30
 /** No-Drip Trip bonus, and the scoop it needs as a share of capacity. */
-export const NO_DRIP_BONUS = 10
+export const NO_DRIP_BONUS = 30
 export const NO_DRIP_MIN_SCOOP = 0.9
 
 // ---------------------------------------------------------------- Path hazards
@@ -541,7 +541,7 @@ export const DECLINE_PULSE_MS = 100
 /** Answering stops you for this long while the caller talks. */
 export const TALK_MS = 5000
 /** Mum sends this many coins for a snack when you answer. */
-export const MUM_COINS = 20
+export const MUM_COINS = 60
 
 // ---------------------------------------------------------------- Bathroom threats
 

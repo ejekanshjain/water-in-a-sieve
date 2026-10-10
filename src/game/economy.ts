@@ -1,9 +1,9 @@
 import type { TripRecord } from './sim'
-import { ML_PER_COIN, NO_DRIP_BONUS, NO_DRIP_MIN_SCOOP } from './tuning'
+import { COINS_PER_LITRE, NO_DRIP_BONUS, NO_DRIP_MIN_SCOOP } from './tuning'
 
-/** Coins for a delivery: 10 per litre, rounded per delivery. */
+/** Coins for a delivery: COINS_PER_LITRE per litre, rounded per delivery. */
 export function coinsFor(deliveredMl: number): number {
-  return Math.round(deliveredMl / ML_PER_COIN)
+  return Math.round((deliveredMl * COINS_PER_LITRE) / 1000)
 }
 
 /** No-Drip badge state when a trip starts: only a near-full scoop can earn it. */

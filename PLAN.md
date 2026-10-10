@@ -46,7 +46,7 @@ Times are for an average player on desktop.
 - **0:30 Scoop.** Hint: "Grab the sieve. Dip it. Hold. Lift slowly." The fill ring fills. Your first lift is jerky and the water splashes back: "Slowly." Scoops left: 4.
 - **0:40 Garden Path, trip 1.** Hint: "Keep holding. Hold W to walk." The steadiness ring glows around the sieve. Trip 1 has no drift and one root at 20 m. Hold W from the start and you reach it at 8 m/s: the ghost tick on the ring turns red, the tick-tick speeds up, and the sieve drains. "Gone. All of it."
 - **1:10 Trip 2 adds drift.** Hint: "The sieve wanders. Keep it on the dot." Tilt loss shows a red wedge on the rim and a speeding drip.
-- **1:35 House.** The bucket waits on the back step. Hint: "Move right to pour. Stay in the green." The pour gauge shows its green band. "+8" floats off the coin badge. The No-Drip badge cracked at 40 m, when you sloshed.
+- **1:35 House.** The bucket waits on the back step. Hint: "Move right to pour. Stay in the green." The pour gauge shows its green band. "+24" floats off the coin badge. The No-Drip badge cracked at 40 m, when you sloshed.
 - **1:45 Walk Back.** Hint: "Nothing to spill. Run." You sprint back in 7s. The trip report reads "0.8 L. The bucket is 8% full."
 - **3:30 The fifth scoop** empties the well bucket. "The well needs 1 min to refill." The refill runs while you carry. At the back step the cat is drinking from the bucket; you shoo it. Back at the well with 0:20 left, a frog sits on the crank. You drag it into the grass; it hops back once. The well dings.
 - **4:30 Trip 7.** A buzzing starts at 40 m. Hint: "A fly. Hold F to blow it away." Blowing ripples the water. The second time it comes back faster and angrier. After two blows: "Fine. Keep your water."
@@ -55,7 +55,7 @@ On a phone the first five minutes match, but the phone is the sieve. You calibra
 
 ### The Middle
 
-- **Bucket done at about 10 min.** "Bucket: done. The toilet flushes once." You kick the empty bucket into the shed (Matter.js tumble). +50 coins. Autumn arrives with the kitchen sink, piled with dirty dishes.
+- **Bucket done at about 10 min.** "Bucket: done. The toilet flushes once." You kick the empty bucket into the shed (Matter.js tumble). +150 coins. Autumn arrives with the kitchen sink, piled with dirty dishes.
 - **Kitchen sink, about 10 to 30 min.** The path has 4 bumps and a rose bush at 60 m. Each season reshuffles the bumps, and a mole pops out of each new one. You buy Wax Coating, then Finer Mesh. Leaves blow into the well bucket and fall toward the sieve. Flies, sneezes, the dog and phone calls break up trips. Callers rotate: the interviewer, Mum, a scam, and the water company ("We'll restore your supply soon").
 - **Bathtub, about 30 to 95 min.** The tub has a painted litre ruler. Bigger Sieve doubles each trip but makes the meter twitchier. The cat pulls the plug chain, and a gurgle at the well tells you. Winter starts at 15 L. Every drain you caused leaves a patch that freezes. Ice slips tear holes, so you thread needles and sew while glue dries. You lay paving stones one per walk back. At 25, 50 and 75 L a 3s gag plays: the duck floats, the cat tests the water, the interviewer reschedules.
 - **Spring at 60 L.** Rain pours through the skylight and fills the tub for you, then drains back out: "It was never yours." Later visits escalate: an umbrella, scooping the rain, a rainbow.
@@ -145,7 +145,7 @@ The status line leads with the well, glue and slippers countdowns and the red tr
 ```text
 +------ 415 px ------+------ 450 px design ------+------ 415 px ------+
 | Steadiness (big)   | distance bar              | Bucket 4.2 / 10 L  |
-| Sieve 0.8 L        |    ring + sieve cam       | Coins 85           |
+| Sieve 0.8 L        |    ring + sieve cam       | Coins 255          |
 | No-Drip badge      |                           | Trip 7 . Summer    |
 | Controls:          |                           | Well 0:42 Glue 0:12|
 |  Mouse or Space:   | hero  path ~~~~~~~~~~~~~~~~~~~~~~ (the world  |
@@ -468,13 +468,13 @@ Calls:
 
 - Callers rotate: the interviewer, Mum, a scam and the water company.
 - A declined Mum calls back on the next trip. The scam caller rings twice in a row.
-- Answering pays off sometimes. Mum sends 20 coins for a snack. The interviewer asks a question you answer with E or F, and the ending quotes your answer back. The water company says "Soon."
+- Answering pays off sometimes. Mum sends 60 coins for a snack. The interviewer asks a question you answer with E or F, and the ending quotes your answer back. The water company says "Soon."
 
 ### Economy and Upgrades
 
-- Each delivery pays `Math.round(deliveredMl / 100)` coins, so 10 coins per litre.
-- **No-Drip Trip, +10 coins:** the scoop held at least 90% of capacity, and the trip had zero counted losses (slosh, tilt dribble, hole leaks, splash, drains). Base drip doesn't count. A No-Drip badge shows during the carry and cracks, with a caption, on your first counted loss.
-- Container bonuses: bucket +50, kitchen sink +100.
+- Each delivery pays `Math.round((deliveredMl * COINS_PER_LITRE) / 1000)` coins. `COINS_PER_LITRE` is 30.
+- **No-Drip Trip, +30 coins:** the scoop held at least 90% of capacity, and the trip had zero counted losses (slosh, tilt dribble, hole leaks, splash, drains). Base drip doesn't count. A No-Drip badge shows during the carry and cracks, with a caption, on your first counted loss.
+- Container bonuses: bucket +150, kitchen sink +300, bathtub none. The captions read "+150 coins. Next: the kitchen sink." and "+300 coins. Next: the bathtub."
 - Upgrades use the shared `createShop`. Each def extends `UpgradeDef` with typed effect fields.
 
 | Upgrade | Cost | Helps | New chore or downside |
@@ -545,8 +545,8 @@ Every line of the "Game 3: Water in a Sieve" section maps to a mechanic and a mi
 | The dog runs between your legs | Dog event, stop to let it pass | M14 |
 | Your phone rings, in the game | Caller line, Answer or Decline, escalation, buzz pulses | M14 |
 | Rain falls into the tub and drains away, mocking you | Guaranteed rain gag with `rainMl`, escalating | M14 |
-| Each litre that reaches the tub pays coins | 10 coins per litre | M3 |
-| A full trip with no drips pays a bonus | No-Drip Trip +10 with a cracking badge | M3 |
+| Each litre that reaches the tub pays coins | 30 coins per litre | M3 |
+| A full trip with no drips pays a bonus | No-Drip Trip +30 with a cracking badge | M3 |
 | Finer mesh: holds more, fills slowly | +0.5 L, tau 1.0s | M16 |
 | Wax coating: fewer drips, rewax every 10 trips | x 0.35 drips, Rewax chore | M15 |
 | Bigger sieve: more water, heavier, harder to hold | x 2 capacity, x 1.15 total | M16, M25 |
@@ -1096,7 +1096,7 @@ Tests sit next to the code. They use plain objects for input, a seeded `rng`, an
 | `events.test.ts` | No events before trip 6; one per trip; 2-trip cooldown; seeded rolls repeat; every warning lasts at least 1.2s; failed counters drain directly in Assist Mode and at Sensitivity 0.5; the fly gives up after 2 blows; sneeze held in when frozen and not when walking; dog passes when stopped; declined callers escalate; the bathroom slot is guaranteed on Last Trip |
 | `chores.test.ts` | Holes and glue block `scoop`; refill blocks `crank`; the frog blocks `crank`; every wait start leaves at least 70% of its time covered; a refill's house chore is the wet floor, or the cat when its roll comes up; reaching the house counts the 7s run back; Rewax appears after 10 trips; soaked slippers open the drying chore; the threading eye sways more with a higher hand level; an out-of-order stitch unpicks the last one |
 | `containers.test.ts` | Completion at capacity locks the container; whole-mL drains with remainders; cat and plug rates (0.48 L and 0.9 L a minute) that stop once fixed and only start when eligible; a pour ends in a visit while the cat drinks; rain returns `rainMl` to 0 and is guaranteed on the first spring arrival; milestones fire once at 25, 50 and 75 L; losses stop while paused |
-| `economy.test.ts` | Coins round per delivery; a clean trip earns No-Drip without wax; one slosh tick loses it; container bonuses; upgrade effects and their chores (a laid stone flattens its segment's bumps); joke buys |
+| `economy.test.ts` | Deliveries pay 30 coins per litre, rounded per delivery; a clean trip earns No-Drip without wax; one slosh tick loses it; container bonuses; upgrade effects and their chores (a laid stone flattens its segment's bumps); joke buys |
 | `share.test.ts` | "Trip 41: lost 3 L to a fly"; one decimal under 10 L with no trailing ".0"; every cause has a phrase; fail and ending cards carry their 4 named stats |
 | `pacing.test.ts` | Whole seeded games: the average estimate is between 60 and 120 minutes, the unskilled one above 120 with every game finished; unskilled fails more in every container; the cat and the plug cost under 8 L; Assist Mode fails an unskilled player on 20% to 35% of trips, within 8 points of the average player without it, and an average one on 8% to 18%; Assist Mode speeds an unskilled player up and still takes an hour; phase rates and the estimate's extras from plain samples |
 | `sim.test.ts` | From M1: autopilot completes a full trip, delivers what the ledger says and keeps it balanced; a scripted flick drains with cause `jolt`; a held pointer keeps its tilt across scene changes; a blur release pauses instead of tipping. Each milestone extends it. |
@@ -1283,6 +1283,16 @@ Ekansh delegated every design, tuning and balance decision to the lead and is no
 - **Desktop drift stays:** the controls list now says "Mouse: steer the sieve onto the dot". Reason: a resting mouse is perfectly still, so drift is the desktop challenge. DESIGN.md's controls table still says "keep the mouse still" and needs the lead's edit.
 - **Base drip stays at 0.8%:** 0.5% cut an average game from 108 trips to 104. Reason: trip count follows the sieve size; the design's 60 to 70 counts delivering trips, and the game measures 76.
 - **Paved Path flattens bumps:** a laid stone removes its segment's bumps instead of halving them. Reason: DESIGN.md promises fewer bumps, and a bump vanishing under a stone is visible progress. A paving player still averages 104 min.
+
+## Coin Boost Decision (2026-10-10)
+
+- **All coin income is tripled:** upgrades come about 3x sooner. Reason: the game feels faster. The new values:
+  - Delivery pay: 30 coins per litre (10), as `COINS_PER_LITRE` in place of `ML_PER_COIN`.
+  - No-Drip Trip: +30 coins (+10).
+  - Container bonuses: bucket +150 (+50), kitchen sink +300 (+100), bathtub none (none).
+  - Mum's call: 60 coins (20). She says "I've sent you 60 coins. Buy a snack."
+- **Prices stay the same:** upgrades and joke buys cost what section 3 lists.
+- **Milestone entries keep the old amounts:** section 11 records what each milestone built and measured at the time. Section 5 measured its times with the old income too.
 
 ## Owner Follow-Ups
 
