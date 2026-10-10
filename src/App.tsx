@@ -25,6 +25,7 @@ import {
   closeModal,
   covered,
   createGame,
+  ENDING,
   FORCE_TRAY,
   goToChore,
   noteFail,
@@ -141,6 +142,7 @@ export function App() {
         const dev = installDev({ game, input, viewport, renderer })
         stopDev = dev.dispose
         setDevActions(dev.actions)
+        if (ENDING) dev.showEnding()
       })
     }
     return () => {

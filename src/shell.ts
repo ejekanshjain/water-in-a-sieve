@@ -20,7 +20,10 @@ import {
 
 const params = new URLSearchParams(location.search)
 /** Dev only: `?skip` starts at the well with no start screen and no cold open, for automation. */
-export const SKIP = import.meta.env.DEV && params.has('skip')
+export const SKIP =
+  import.meta.env.DEV && (params.has('skip') || params.has('ending'))
+/** Dev only: `?ending` fills the tub and plays the ending as soon as the game loads. */
+export const ENDING = import.meta.env.DEV && params.has('ending')
 /**
  * Dev only: `?tray` treats any device as a phone: the start screen offers Walk for Real
  * and "Hold It Like a Tray" follows the start tap, for browser tests.

@@ -75,6 +75,7 @@ type DevEvent =
 export function installDev({ game, input, viewport, renderer }: DevContext): {
   dispose: () => void
   actions: DevAction[]
+  showEnding: () => void
 } {
   const { sim, hud } = game
   /**
@@ -448,5 +449,5 @@ export function installDev({ game, input, viewport, renderer }: DevContext): {
         )
     }
   ]
-  return { dispose: unexpose, actions }
+  return { dispose: unexpose, actions, showEnding: api.showEnding }
 }
